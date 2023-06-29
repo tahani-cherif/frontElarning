@@ -79,7 +79,7 @@ import api from "../config-axios.jsx"
   export const userSlice = createSlice({
     name:'user',
     initialState:{
-        data:[],
+        alldata:[],
         user:[],
         status:null,
         statuslogin:null,
@@ -147,7 +147,7 @@ import api from "../config-axios.jsx"
                 state.error=action.payload;
           },
           [gettAllUser.fulfilled]:(state,action)=>{
-            state.data = action.payload;
+            state.alldata = action.payload;
             state.status ="success";
             state.error =null;
          },

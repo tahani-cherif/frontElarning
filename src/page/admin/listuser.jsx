@@ -9,7 +9,7 @@ import { gettAllUser,updateuser } from '../../redux/user'
 import Swal from 'sweetalert2'
 
 const Listeuser = () => {
-  const { data } = useSelector(state => state.user)
+  const { alldata } = useSelector(state => state.user)
   const { status } = useSelector(state => state.user)
   const dispatch = useDispatch();
   useEffect(() => {
@@ -82,7 +82,7 @@ const Listeuser = () => {
           >
             <DataGrid
               getRowId={(row) => row?._id}
-              rows={data?.slice()?.sort(function (a, b) {
+              rows={alldata?.slice()?.sort(function (a, b) {
                 return new Date(b?.createdAt) - new Date(a?.createdAt);
               }) .filter(x=>x._id!=localStorage.getItem("userid"))|| []}
               columns={columns}
