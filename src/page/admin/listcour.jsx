@@ -42,7 +42,7 @@ const ListeCourAdmin=()=>{
          
           
         },
-        { field: "dullName", headerName: "Nom de formateur",valueGetter: rowData =>{
+        { field: "fullName", headerName: "Nom de formateur",valueGetter: rowData =>{
           console.log(rowData)
           return rowData?.row?.createur?.fullName
         },width: 300 },

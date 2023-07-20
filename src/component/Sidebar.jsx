@@ -106,31 +106,15 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
           <ListItemIcon>
             <FormatListBulletedIcon fontSize="small" sx={{ color: "white"}}/>
           </ListItemIcon>
-          <ListItemText>Consulter la liste des cours</ListItemText>
+          <ListItemText>liste des cours</ListItemText>
         </MenuItem>
         </Link>
-        <Link to="/formateur/listequizformateur" onClick={handleMenu}>
-           <MenuItem>
+        <Link to='/formateur/listecour' onClick={handleMenu}>
+        <MenuItem>
           <ListItemIcon>
-            <QuizIcon fontSize="small" sx={{ color: "white"}}/>
+            <FormatListBulletedIcon fontSize="small" sx={{ color: "white"}} />
           </ListItemIcon>
-          <ListItemText>Consulter la liste des quiz crées</ListItemText>
-        </MenuItem>
-        </Link>
-        <Link to="/formateur/listevideoformateur" onClick={handleMenu}>
-           <MenuItem>
-          <ListItemIcon>
-            <VideoLibraryIcon fontSize="small" sx={{ color: "white"}}/>
-          </ListItemIcon>
-          <ListItemText>Consulter la liste des vidéos</ListItemText>
-        </MenuItem>
-        </Link>
-        <Link to="/formateur/listepdfformateur" onClick={handleMenu}>
-           <MenuItem>
-          <ListItemIcon>
-            <PictureAsPdfIcon fontSize="small"sx={{ color: "white"}} />
-          </ListItemIcon>
-          <ListItemText>Consulter la liste des PdfExercices</ListItemText>
+          <ListItemText>liste des cours Achete</ListItemText>
         </MenuItem>
         </Link>
         <Link to="/editprofile" onClick={handleMenu}>
@@ -141,12 +125,20 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
           <ListItemText>Consulter votre profil</ListItemText>
         </MenuItem>
         </Link>
+        <Link to="/formateur/cart" onClick={handleMenu}>
+          <MenuItem>
+          <ListItemIcon>
+            <ShoppingCartIcon fontSize="small" sx={{ color: "white"}}/>
+          </ListItemIcon>
+          <ListItemText>Accéder au panier</ListItemText>
+        </MenuItem>
+        </Link>
         <Link to="/chatroom" onClick={handleMenu}>
            <MenuItem>
           <ListItemIcon>
             <MarkUnreadChatAltIcon fontSize="small" sx={{ color: "white"}}/>
           </ListItemIcon>
-          <ListItemText>Echanger des messages</ListItemText>
+          <ListItemText>Chatroom</ListItemText>
         </MenuItem>
         </Link>
       </MenuList>

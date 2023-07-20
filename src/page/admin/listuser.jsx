@@ -37,7 +37,7 @@ const Listeuser = () => {
         return [
           params.row.role === "formateur" ? <p>Formateur</p> : <Button variant="contained" color="success"
             onClick={() => {
-              dispatch(updateuser({_id:params.row._id,role:"formateur"})).then(data => {
+              dispatch(updateuser({_id:params.row._id,data:{role:"formateur"}})).then(data => {
             
                 if (data.type === "user/updateuser/fulfilled") {
                   Swal.fire(

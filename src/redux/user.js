@@ -64,7 +64,7 @@ import api from "../config-axios.jsx"
                 'user/updateuser',
                 async (data, { rejectWithValue }) => {
                   try {
-                    const response = await api.put(`/user/${data._id}`,data);
+                    const response = await api.put(`/user/${data._id}`,data.data);
                     return response.data;
                   } catch (error) {
                     return rejectWithValue(error.response.data);

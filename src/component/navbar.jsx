@@ -15,9 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar({handleMenu,setnav}) {
   
-    const user=JSON.parse(localStorage.getItem('user'));
-
-    console.log(user)
+  const user=JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const {data} = useSelector(state=>state.user)
   const {datacart} = useSelector(state=>state.cart)
