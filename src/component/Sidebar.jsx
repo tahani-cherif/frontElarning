@@ -26,7 +26,7 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
     return (<div className={`app-menu ${isMenuOpen ? "menu-open" : ""}`}>
         <Paper sx={{ width: 320, maxWidth: '100%',backgroundColor:"#144272",color: "white" }}>
         <Link to="/user" onClick={handleMenu}> <Typography variant="h5" gutterBottom style={{color: "white",padding: "23px",marginTop: "11px"}}>
-      NewELMS</Typography></Link>
+        RAPYD LEARN</Typography></Link>
       <Typography variant="subtitle1" gutterBottom  style={{color: "white",padding: "10px",marginTop: "-34px",    paddingLeft: "26px"}}>
        {user?.fullName}
       </Typography>
@@ -46,14 +46,6 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
             <FormatListBulletedIcon fontSize="small" sx={{ color: "white"}} />
           </ListItemIcon>
           <ListItemText>Consulter la liste des cours</ListItemText>
-        </MenuItem>
-        </Link>
-        <Link to="/user/listequizz" onClick={handleMenu}>
-           <MenuItem>
-          <ListItemIcon>
-            <QuizIcon fontSize="small" sx={{ color: "white"}}/>
-          </ListItemIcon>
-          <ListItemText>Consulter la liste des quiz passées</ListItemText>
         </MenuItem>
         </Link>
         <Link to="/editprofile" onClick={handleMenu}>
@@ -77,7 +69,7 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
           <ListItemIcon>
             <MarkUnreadChatAltIcon fontSize="small" sx={{ color: "white"}}/>
           </ListItemIcon>
-          <ListItemText>Echanger des messages</ListItemText>
+          <ListItemText>Chatroom</ListItemText>
         </MenuItem>
         </Link>
       </MenuList>
@@ -87,7 +79,7 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
        return (<div className={`app-menu ${isMenuOpen ? "menu-open" : ""}`}>
         <Paper sx={{ width: 320, maxWidth: '100%',backgroundColor:"#144272",color: "white"  }}>
         <Link to="/formateur" onClick={handleMenu}> <Typography variant="h5" gutterBottom style={{color: "white",padding: "23px",marginTop: "11px"}}>
-      NewELMS</Typography></Link>
+        RAPYD LEARN</Typography></Link>
       <Typography variant="subtitle1" gutterBottom  style={{color: "white",padding: "10px",marginTop: "-34px",    paddingLeft: "26px"}}>
        {user?.fullName} {' '}
       </Typography>
@@ -148,7 +140,7 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
           return (<div className={`app-menu ${isMenuOpen ? "menu-open" : ""}`}>
            <Paper sx={{ width: 320, maxWidth: '100%' ,backgroundColor:"#144272",color: "white" }}>
            <Link to="/admin" onClick={handleMenu}> <Typography variant="h5" gutterBottom style={{color: "white",padding: "23px",marginTop: "11px"}}>
-         NewELMS</Typography></Link>
+           RAPYD LEARN</Typography></Link>
          <Typography variant="subtitle1" gutterBottom  style={{color: "white",padding: "10px",marginTop: "-34px",    paddingLeft: "26px"}}>
          {user?.fullName} {' '}
          </Typography>

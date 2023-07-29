@@ -94,8 +94,8 @@ const Cart=()=>{
                         </div>
                       </div>
                     </td>
-                    <td className="tab">{item?.actual_Price} Dt</td>
-                    <td  className="tab" >{item?.discount_Price && item?.discount_Price!=0? item?.discount_Price : item?.actual_Price} DT</td>
+                    <td className="tab">{item?.actual_Price} €</td>
+                    <td  className="tab" >{item?.discount_Price && item?.discount_Price!=0? item?.discount_Price : item?.actual_Price} €</td>
                     <td > <Button variant="contained" startIcon={<DeleteIcon />} color="error" style={{marginLeft:"31px"}} onClick={()=>
                      {
                     dispatch( cartaction.deletetocart(item))
@@ -110,7 +110,7 @@ const Cart=()=>{
               <div className="d-flex">
                 <div className="total">
                   <label className="text-muted font-weight-normal m-0">Montant total</label>
-                  <div className="text-large"><strong>{total} Dt</strong></div>
+                  <div className="text-large"><strong>{total} €</strong></div>
                 </div>
               </div>
             </div>

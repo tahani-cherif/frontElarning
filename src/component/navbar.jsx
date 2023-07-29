@@ -28,7 +28,7 @@ function Navbar({handleMenu,setnav}) {
     <div style={{backgroundColor:"#144272"}}>
       <div className="flex space-x-4  h-[74px] shadow-lg text-center justify-between items-center px-4">
         <MenuIcon className="h-6 " onClick={handleMenu} style={{cursor: "url(hand.cur), pointer",color:"white"}}/>
-        <Link to={user?.role==="admin" ?"/admin" :user?.role==="formateur" ? "/formateur" : user?.role==="user"? "/user" :"/"}><h2 className="text-3xl font-bold" style={{fontFamily: "cursive",color:"white"}}>SmartLearn</h2></Link>
+        <Link to={user?.role==="admin" ?"/admin" :user?.role==="formateur" ? "/formateur" : user?.role==="user"? "/user" :"/"}><h2 className="text-3xl font-bold" style={{fontFamily: "cursive",color:"white"}}>RAPYD LEARN</h2></Link>
         <div className='hidden bg-[#f8fafb] md:flex border border-black rounded-3xl flex-1 h-12 items-center'>
           <SearchIcon className="h-5 w-5 mx-4 text-gray" style={{color:"#144272"}}/>
           <input type="text" placeholder='Rechercher' name="txt" className='bg-transparent text-sm outline-none ' value={search} onChange={(e)=>{ 
@@ -40,7 +40,7 @@ function Navbar({handleMenu,setnav}) {
         </div>
         <div className='flex'>
           <SearchIcon className='h-6 w-6 text-gray-400 md:hidden' />
-         {user?.role==="admin"? null :<><Link to="/user/cart" className='cart-btn' ><ShoppingCartIcon className='h-6 w-6 cursor-pointer '  style={{color:"white"}}/>
+         {user?.role==="admin"? null :<><Link to="/cart" className='cart-btn' ><ShoppingCartIcon className='h-6 w-6 cursor-pointer '  style={{color:"white"}}/>
           </Link>
           {user?.role!="admin" ? <span className='item-counts-badge bg-orange-400 absolute rigth-10 top-10 text-xs font-bold block w-23 h-23 text-white rounded-full flex justify-center items-center' style={{backgroundColor:"#2C74B3",width:"15px"}}>{datacart?.length}</span> :null}
           </> }</div>

@@ -50,7 +50,7 @@ const Passwordsend = () => {
   }, [disable]);
 
   return (
-    <div className="flex justify-center items-center w-screen h-screen" >
+    <div className="flex justify-center items-center w-full h-screen" >
       <div className="bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl"  style={{backgroundColor:"#144272"}}>
         <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
           <div className="flex flex-col items-center justify-center text-center space-y-2">

@@ -82,8 +82,6 @@ const UploadCours = () => {
         formData.append('actual_Price', values.actual_Price)
         formData.append('discount_Price', values.discount_Price)
         formData.append('bioFormateur', values.bioFormateur)
-        // formData.append('rating_Count', 200)
-        // formData.append('rating_Star', 3)
         dispatch(createcour(formData)).then(secc => {
             if (secc?.type === "cour/createcour/fulfilled") {
                 navigate("/formateur/listecourformateur")
@@ -131,7 +129,7 @@ console.log(selectedOption)
                                         <div className="media align-items-center " style={{ display: "flex" }}>
 
                                             <div className="play-video" style={{
-                                                width: "400px",
+                                                width: "400px",  
                                                 height: "370px",
                                                 border: "3px dashed silver",
                                                 backgroundColor: "white",
@@ -235,6 +233,7 @@ console.log(selectedOption)
                                                                 style={{ width: '190px' }} id="idTitre"
                                                                 aria-describedby="emailHelp"
                                                                 name='actual_Price'
+                                                                // eslint-disable-next-line react/jsx-no-duplicate-props
                                                                 type="number"
                                                                 placeholder="Entrez votre prix"
                                                                 onBlur={handleBlur}
@@ -271,7 +270,7 @@ console.log(selectedOption)
                                                 className={classes.root}
                                                 sx={{ input: { color: "white" }, label: {color: "white"}, floatingLabelFocusStyle: {
                                                     color: "white"
-                                                },shrink:{color: "white"}}}  
+                                                },shrink:{color: "white"}}}   
                                                 style={{ width: '400px', marginTop: '3px' }}
                                                 inputProps={{ style: { color: 'white'} }}
                                                     id="desc" multiline  rows={5} placeholder="entrez ici les pré-connaissance de l'étudiant"

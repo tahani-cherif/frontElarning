@@ -274,7 +274,7 @@ export default function SignUp() {
           </form>
       )}
     </Formik>
-    {statussignup==="failed" || data.success===false ?  <Alert severity="error" style={{marginTop:"10px"}}>Il y a un probleme verifier les donées saisies</Alert> :null}
+    {statussignup==="failed" || data?.success===false ?  <Alert severity="error" style={{marginTop:"10px"}}>Il y a un probleme verifier les donées saisies</Alert> :null}
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>

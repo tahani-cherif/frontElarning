@@ -140,7 +140,7 @@ const ListeCourFormateur = () => {
       cellClassName: 'actions',
       getActions: (params) =>
         [
-          <Button variant="outlined" style={{'color': 'white'}}  startIcon={<OndemandVideoIcon style={{'color': 'white'}} />} onClick={() => { navigate(`/formateur/uploadVideoPage/${params.row._id}`) }}>
+          <Button variant="outlined" style={{'color': 'white'}}  startIcon={<OndemandVideoIcon style={{'color': 'white'}} />} onClick={() => { navigate(`/formateur/uploadvideo/${params.row._id}`) }}>
             ADD Video
           </Button>,
         ]

@@ -42,7 +42,7 @@ useEffect(()=>{
                           </small>
                         </div>
                         </div>
-                       <Link to={`/user/deatillecoursuser/${item?._id}`} style={{ display: "flex", flexDirection: "column",justifyContent: "center" }}> <Button variant="contained">Accéder au cours</Button></Link>
+                       <Link to={`/${user?.role==="formateur" ? "formateur" : "user"}/deatillecoursuser/${item?._id}`} style={{ display: "flex", flexDirection: "column",justifyContent: "center" }}> <Button variant="contained">Accéder au cours</Button></Link>
                       </div>
          
            </div>  })}
