@@ -72,7 +72,17 @@ import api from "../config-axios.jsx"
                 }
               );
            
-         
+              export const sendemailcontact = createAsyncThunk(
+                'user/sendemailcontact',
+                async (data, { rejectWithValue }) => {
+                  try {
+                    const response = await api.post(`/auth/contact`,data);
+                    return response.data;
+                  } catch (error) {
+                    return rejectWithValue(error.response.data);
+                  }
+                }
+              );     
             
             
             
@@ -80,6 +90,7 @@ import api from "../config-axios.jsx"
     name:'user',
     initialState:{
         alldata:[],
+        data:[],
         user:[],
         status:null,
         statuslogin:null,
@@ -90,6 +101,20 @@ import api from "../config-axios.jsx"
         
     },
     extraReducers:{
+      [sendemailcontact.fulfilled]:(state,action)=>{
+        state.data = action.payload;
+        state.statuslogin ="success";
+        state.error =null;
+     },
+     [sendemailcontact.pending]:(state)=>{
+        state.statuslogin ="loading";
+        state.error =null;
+
+     },
+     [sendemailcontact.rejected]:(state,action)=>{
+            state.statuslogin ="failed";
+            state.error=action.payload;
+      },
         [login.fulfilled]:(state,action)=>{
             state.data = action.payload;
             state.statuslogin ="success";

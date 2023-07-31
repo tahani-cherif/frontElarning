@@ -5,6 +5,7 @@ import courSlice from "./cour";
 import categorySlice from "./category";
 import videoSlice from "./video";
 import pdfSlice from "./pdf";
+import commentSlice from "./comment";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     category: categorySlice,
     video: videoSlice,
     pdf: pdfSlice,
+    comment:commentSlice,
   },
 });

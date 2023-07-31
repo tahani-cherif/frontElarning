@@ -26,7 +26,13 @@ import Uploadpdf from "./page/formateur/uploadpdf";
 import UploadVideoPage from "./page/formateur/uploadvideo";
 import UpdateVideoPage from "./page/formateur/updatevideo";
 import Detaillecour from "./page/detaillecour";
-import Footer from "./component/footer";
+import Footers from "./component/footer";
+import Consditiongenearle from "./page/consitiongenearle";
+import { Layout, theme } from 'antd';
+import VideoPage from "./page/videopage";
+import Contact from "./page/contact";
+
+const { Header, Content, Footer, Sider } = Layout;
 
 export const RecoveryContext = createContext();
 
@@ -60,6 +66,7 @@ const LinkFormateur = () => {
       <Route path="/uploadvideo/:id" element={<UploadVideoPage />} />
       <Route path="/updatevideo/:id" element={<UpdateVideoPage />} />
       <Route path="/deatillecours/:id" element={<Detaillecour />} />
+      <Route path="/videopage/:id" element={<VideoPage />} />
     </Routes>
   );
 };
@@ -72,6 +79,7 @@ const LinkUser = () => {
       <Route path="/listecour" element={<ListeCourUser />} />
       <Route path="/deatillecoursuser/:id" element={<SingleCoursePageuser />} />
       <Route path="/deatillecours/:id" element={<Detaillecour />} />
+      <Route path="/videopage/:id" element={<VideoPage />} />
     </Routes>
   );
 };
@@ -93,6 +101,7 @@ function App() {
       value={{ page, setPage, otp, setOTP, setEmail, email, user, setUser }}
     >
       <BrowserRouter>
+      <Layout className="bg-[#0A2647]" >
         <Navbar handleMenu={handleMenu} />
         {localStorage.getItem("tocken") ? (
           <>
@@ -105,7 +114,9 @@ function App() {
             ></ReactDimmer>
           </>
         ) : null}
-        <Routes>
+        <Content style={{ margin: '24px 16px 0', overflow: 'initial',  minHeight: "100vh",margin:"0px"}}>
+          
+        <Routes className='relative h-full min-h-full'>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="/passwordrecovery" exact element={<Passwordsend />} />
@@ -117,8 +128,12 @@ function App() {
           <Route path="/cart" exact element={<Cart />} />
           <Route path="/editprofile" exact element={<Editprofile />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/consitiongenearle" element={<Consditiongenearle />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
-        <Footer />
+        </Content>
+       <Footers />
+        </Layout>
       </BrowserRouter>
     </RecoveryContext.Provider>
   );

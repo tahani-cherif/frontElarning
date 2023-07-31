@@ -22,7 +22,7 @@ useEffect(()=>{
             <h2 style={{fontSize:"2rem"}}>Liste des cours achetés</h2>
         </div>
       {datauser?.map(item=>
-         { return <div style={{padding: "29px",backgroundColor: "#205295",margin: "38PX 39PX 11px"}}>
+         { return <div style={{padding: "29px",backgroundColor: "#205295",margin: "38PX 39PX 11px"}} >
         <div style={{display:'flex',justifyContent:'space-between'}}>
             <div className="media align-items-center" style={{display: "flex"}}>
                         <img src={`http://localhost:8000/${item?.image}`} className="d-block  ui-bordered mr-4" alt="" style={{    width:"100px !important",

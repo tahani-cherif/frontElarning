@@ -7,8 +7,7 @@ import {
   MenuIcon,
 } from "@heroicons/react/outline";
 import { useDispatch,useSelector } from 'react-redux';
-// import  {getuserbyid,notifs,updatenotifs} from '../redux/login'
-// import  {searchcour} from '../redux/coursSlice'
+import  {searchcour} from '../redux/cour'
 import { useEffect, useState,useContext } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from "react-router-dom";
@@ -33,11 +32,14 @@ function Navbar({handleMenu,setnav}) {
           <SearchIcon className="h-5 w-5 mx-4 text-gray" style={{color:"#144272"}}/>
           <input type="text" placeholder='Rechercher' name="txt" className='bg-transparent text-sm outline-none ' value={search} onChange={(e)=>{ 
            setSearch(e.target.value);
-            // dispatch(searchcour(e.target.value))  
+            dispatch(searchcour(e.target.value))  
         }}
         style={{color:"#144272"}}
             />
         </div>
+
+       <Link to="/consitiongenearle"> <p className='cursor-pointer'>Condition de paiement</p></Link>
+       <Link to="/contact"> <p className='cursor-pointer'>Contact</p></Link>
         <div className='flex'>
           <SearchIcon className='h-6 w-6 text-gray-400 md:hidden' />
          {user?.role==="admin"? null :<><Link to="/cart" className='cart-btn' ><ShoppingCartIcon className='h-6 w-6 cursor-pointer '  style={{color:"white"}}/>

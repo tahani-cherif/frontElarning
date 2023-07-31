@@ -81,6 +81,18 @@ export const createcour = createAsyncThunk(
   }
 );
 
+export const searchcour = createAsyncThunk(
+  'cour/serchcour',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/cour/getcoursearch?search=${data}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -104,6 +116,19 @@ export const userSlice = createSlice({
       state.error = null;
     },
     [getALLcour.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.payload;
+    },
+    [searchcour.fulfilled]: (state, action) => {
+      state.datacour = action.payload;
+      state.status = "success";
+      state.error = null;
+    },
+    [searchcour.pending]: (state) => {
+      state.status = "loading";
+      state.error = null;
+    },
+    [searchcour.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.payload;
     },

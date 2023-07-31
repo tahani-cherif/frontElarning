@@ -14,7 +14,8 @@ const Home=()=>{
     useEffect(() => {
       dispatch(getALLcour())
     }, [])
-    return  <div className="container mx-auto p-16">{status==="loading" ? <div style={{display: "flex",
+    return  <div className="container mx-auto p-16">
+      {status==="loading" ? <div style={{display: "flex",
     justifyContent: "center",
     marginTop: "81px"}}><CircularProgress /> </div>:
         <div className='grid grid-cols-3 gap-3'>

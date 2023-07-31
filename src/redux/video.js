@@ -51,6 +51,8 @@ export const videoSlice = createSlice({
   initialState: {
     data: [],
     datavideo: [],
+    datavideos: [],
+    statusvideo: null,
     status: null,
     error: null,
   },
@@ -58,6 +60,7 @@ export const videoSlice = createSlice({
   extraReducers: {
     [getVideoByCour.fulfilled]: (state, action) => {
       state.data = action.payload;
+      state.datavideo = action.payload;
       state.status = "success";
       state.error = null;
     },
@@ -83,16 +86,20 @@ export const videoSlice = createSlice({
       state.error = action.payload;
     },
     [getVideoByid.fulfilled]: (state, action) => {
-      state.datavideo = action.payload;
+      // state.datavideo = action.payload;
+      state.datavideos = action.payload;
       state.status = "success";
+      state.statusvideo = "success";
       state.error = null;
     },
     [getVideoByid.pending]: (state) => {
       state.status = "loading";
+      state.statusvideo = "loading";
       state.error = null;
     },
     [getVideoByid.rejected]: (state, action) => {
       state.status = "failed";
+      state.statusvideo = "failed";
       state.error = action.payload;
     },
     [updatevideo.fulfilled]: (state, action) => {

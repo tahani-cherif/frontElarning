@@ -11,7 +11,7 @@ import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import  {getALLcour} from '../../redux/cour'
 
 const ListeCourAdmin=()=>{
-    const {data} = useSelector(state=>state.cour)
+    const {datacour} = useSelector(state=>state.cour)
     const {status} = useSelector(state=>state.cour)
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const ListeCourAdmin=()=>{
             >
             <DataGrid
             getRowId={(row) => row?._id}
-            rows={data || []}
+            rows={datacour || []}
             columns={columns}
             components={{ Toolbar: GridToolbar }}
             initialState={{

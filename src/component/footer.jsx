@@ -10,7 +10,8 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-export default function Footer() {
+
+export default function Footers() {
     const {data} = useSelector(state=>state.category)
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -18,7 +19,7 @@ export default function Footer() {
       },[])
       let i=0
   return (
-    <MDBFooter bgColor='light' className='text-center text-lg-start text-muted bg-[#144272] mt-10 mb-0 bottom-0'>
+    <MDBFooter bgColor='light' className='text-center text-lg-start text-muted bg-[#144272] mt-10 mb-0 w-full' >
       <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
       <div className='flex flex-row gap-3'>
         <div className=''>
@@ -86,6 +87,11 @@ export default function Footer() {
               <p>
                 <a href='#!' className='text-reset'>
                 les monnaies virtuelles
+                </a>
+              </p>
+              <p>
+                <a href='#!' className='text-reset'>
+                virement bancaire
                 </a>
               </p>
 

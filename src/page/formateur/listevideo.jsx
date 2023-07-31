@@ -23,7 +23,8 @@ const ListecourVideoFormateur=()=>{
             marginTop: "81px"}}><CircularProgress style={{'color': 'white'}} /> </div>:
      <div className="card" style={{ padding: "20px", width: "80%",backgroundColor:"#144272",marginBottom:"20px" }}>
         <div className="card-header" style={{ display: "flex", justifyContent: "space-between",backgroundColor:"#205295",padding:"20px",borderRadius:"15px 15px 0px 0px" }}>
-            {/* <h2 style={{fontSize:"2rem"}}>Liste Videos de {localStorage.getItem('nomcour')}</h2> */}
+            <h2 style={{fontSize:"2rem"}}>Liste Videos </h2>
+            {/* de {localStorage.getItem('nomcour')} */}
         </div>
 
            {data?.map(item=><div style={{padding: "29px",backgroundColor: "#205295",margin: "38PX 39PX 11px"}}>

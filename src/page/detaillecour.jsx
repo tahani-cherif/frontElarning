@@ -12,7 +12,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {getcourbyid} from '../redux/cour'
-// import {getVideoByCour} from '../redux/video'
+import {getVideoByCour} from '../redux/video'
 import QuizIcon from '@mui/icons-material/Quiz';
 // import {getVideoById} from '../redux/video'
 import Avatar from '@mui/material/Avatar';
@@ -22,26 +22,24 @@ const Detaillecour=()=>{
   const {error} = useSelector(state=>state.cour)
   const {status} = useSelector(state=>state.cour)
   const {data} = useSelector(state=>state.cour)
-//   const {datavideo} = useSelector(state=>state.video)
-const datavideo=""
+  const {datavideo} = useSelector(state=>state.video)
   const dispatch = useDispatch();
   const [video1,setvideo1]=useState()
   useEffect(()=>{
     dispatch(getcourbyid(id))
-    // dispatch(getVideoByCour(id)).then(secc=>{
-    //   const x=secc?.payload?.videos
-    //    setvideo1(x[0])
-    // })
+    dispatch(getVideoByCour(id)).then(secc=>{
+      const x=secc?.payload
+       setvideo1(x[0])
+    })
     localStorage.setItem('courid',id)
        },[])
        let time=0
-       datavideo?.videos?.map(item=>
-        {   if(item.dure.split('min')[1]==="")
-            { time+=Number(item.dure.split('min')[0])}
+       datavideo?.map(item=>
+        {   if(item.dure==="")
+            { time+=Number(item.dure)}
           else {
-            time+=Number(item.dure.split('mn')[0])
-          }})
-      
+            time+=Number(item.dure)
+       }})
 return (
     <SingleCoursePageWrapper>
       <div className='conetnaire' style={{ rowGap: "24px"}}>
@@ -54,12 +52,12 @@ return (
             </div>
           </div>
         <div className='minibox2'>
-        <video controls src={"http://localhost:8000/"+video1?.VideoUrl} width={300}  style={{height:"200px"}}></video>
+        <video controls src={"http://localhost:8000/"+video1?.videoUrl} width={300}  style={{height:"200px"}}></video>
           <p className='title2'>Ce cours comprend :</p>
           <div style={{marginTop:"20px"}}>
             <div className='boxicon'>
              <VideoChatIcon/>
-             <p>{  datavideo?.videos?.length} Videos</p>
+             <p>{  data?.videoId?.length} Videos</p>
             </div>
             <div className='boxicon'>
               <AutoStoriesIcon/>
@@ -119,7 +117,7 @@ return (
       <h2 className='title2' style={{fontSize:"1.8rem",marginBottom:"20px"}}>Contenu du cours</h2>
       <div style={{marginTop:"60px"}}>
       <p style={{marginBottom:"20px"}}>{  datavideo?.videos?.length}  Video • Durée totale: {time} min</p>
-     { datavideo?.videos?.map(item=>
+     { datavideo?.map(item=>
       { 
         return <Accordion style={{color:"white",backgroundColor:"#144272"}}>
         <AccordionSummary

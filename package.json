@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
@@ -20,7 +21,9 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.7.3",
     "axios": "^1.4.0",
+    "emailjs-com": "^3.2.0",
     "formik": "^2.4.2",
     "framer-motion": "^10.12.17",
     "i": "^0.3.7",
