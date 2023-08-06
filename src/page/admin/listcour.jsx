@@ -35,7 +35,7 @@ const ListeCourAdmin=()=>{
                   icon={<OndemandVideoIcon style={{'color': '#17B794'}} />}
                   label="All video"
                   onClick={(event)=> {
-                    navigate(`/admin/listecourvideoadmin/${params.row._id}`)
+                    navigate(`/formateur/listevideobycour/${params.row._id}`)
                   }}
     
                 />,
@@ -48,6 +48,7 @@ const ListeCourAdmin=()=>{
           console.log(rowData)
           return rowData?.row?.createur?.fullName
         },width: 300 },
+        { field: "titre", headerName: "Titre", width: 200 },
         { field: "categorie", headerName: "Categorie", width: 200 },
         { field: "actual_Price", headerName: "Prix initiale", width: 80 },
         { field: "discount_Price", headerName: "Prix discount" , width: 100 },

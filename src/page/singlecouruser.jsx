@@ -28,24 +28,45 @@ const SingleCoursePageuser=()=>{
   const {section} = useSelector(state=>state.cour);
   const dispatch = useDispatch();
   const [video1,setvideo1]=useState()
+   const [time,settime]=useState()
+
   useEffect(()=>{
     dispatch(getcourbyid(id))
-    dispatch(getALLcoursection(id))
+    dispatch(getALLcoursection(id)).then((sec)=>{
+      console.log(sec)
+      let x=0
+      let i=0
+      sec.payload?.map((item)=>
+        {  
+          console.log("dddddd")
+          if(item.dure!="" && item.type==="video")
+            {  if(i===0)
+              {
+                setvideo1(item)
+                i=1;
+              }
+              console.log("ddddddd",item)
+              x+=Number(item.dure)}
+    })
+    settime(x)
+    })
     dispatch(getVideoByCour(id)).then(secc=>{
       console.log(secc)
       const x=secc?.payload
-       setvideo1(x[0])
+      //  setvideo1(x[0])
     })
     localStorage.setItem('courid',id)
        },[])
-       let time=0
-       datavideo?.map(item=>
-        {   if(item.dure==="")
-            { time+=Number(item.dure)}
-          else {
-            time+=Number(item.dure)
-       }})
-       console.log(datavideo)  
+      
+      //  section?.map(item=>
+      //   {   if(item.dure==="" && item.type==="video")
+      //       {
+      //         console.log(item)
+      //         time+=Number(item.dure)}
+      //     else {
+      //       time+=Number(item.dure)
+      //  }})
+       console.log(video1)  
 return (
     <SingleCoursePageWrapper>
       <div className='conetnaire' style={{ rowGap: "24px"}}>
@@ -67,7 +88,7 @@ return (
             </div>
             <div className='boxicon'>
               <AutoStoriesIcon/>
-              <p>{ section?.length-data?.videoId?.length >=0 ? section?.length-data?.videoId?.length : 0}  PDF </p>
+              <p>{ section?.length-data?.videoId?.length >0 ? section?.length-data?.videoId?.length : 0}  PDF </p>
             </div>
           </div>
        

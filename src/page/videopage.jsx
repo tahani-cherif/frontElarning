@@ -115,7 +115,9 @@ const VideoPage = () => {
             </div>
 
             <div className="Recommendation">
-               { section?.filter(x=>x?._id!=id)?.sort((a,b)=>a?.ordre-b?.ordre)?.map(item=> <Card item={item} settest={settest}/>) }
+               { section.slice().sort((a, b) =>{
+            return a.order - b.order;
+        })?.filter(x=>x?._id!=id)?.map(item=> <Card item={item} settest={settest}/>) }
             </div>
       
         </Container>}
