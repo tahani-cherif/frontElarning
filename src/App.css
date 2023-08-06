@@ -92,3 +92,21 @@
   border-radius: 15px;
 } 
 
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color: white !important;
+}
+.MuiInputBase-input{
+  color: white !important;
+}
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+  color: white !important;
+}
+
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+  color: white !important;
+}
+
+.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root{
+  color:white !important;
+}

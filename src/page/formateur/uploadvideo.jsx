@@ -14,6 +14,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import Fab from '@mui/material/Fab';
 const useStyles = makeStyles((theme) => ({
     root: {
       // input label when focused
@@ -73,7 +75,6 @@ const UploadVideoPage = () => {
         formData.append('description', values.description)
         formData.append('titre', values.titre)
         formData.append('categorie', values.categorie)
-        formData.append('ordre', values.ordre)
         formData.append('dure', values.dure)
         formData.append('course', id)
         dispatch(addVideo(formData)).then(secc => {
@@ -90,7 +91,6 @@ const UploadVideoPage = () => {
         description: "",
         titre: "",
         categorie: "",
-        ordre: 0,
         dure: ""
     };
 
@@ -99,7 +99,6 @@ const UploadVideoPage = () => {
         description: yup.string().required("Required"),
         titre: yup.string().required("Required"),
         categorie: yup.string().required("Required"),
-        ordre: yup.number().required("Required"),
         dure: yup.string().required("Required"),
     })
     {
@@ -127,16 +126,33 @@ const UploadVideoPage = () => {
                                                 justifyContent: 'center',
                                                 alignItems: 'center'
                                             }}>
-                                                {values.VideoUrl ? <video className="vidcour "
+                                                {values.VideoUrl ? <div className='flex flex-col items-center'>
+                                                    <video className="vidcour "
                                                     style={{}}
                                                     src={video == null ? values.VideoUrl ? "http://localhost:8000/" + values.VideoUrl : "./video.mp4" : URL.createObjectURL(video)} alt="" />
-                                                    : <><input type="file" id="video-upload" accept="video/*"
-                                                        style={{ display: "", }}
+                                                    <><input type="file" id="video-upload" accept="video/*"
+                                                        style={{ display: "none", }}
                                                         onChange={e => {
                                                             setFieldValue("VideoUrl", e.target.files[0])
                                                             setVideo(e.target.files[0])
                                                         }} />
-                                                    </>}
+                                                   <label htmlFor="video-upload">
+                                                    <Fab component="span" >
+                                                        <AddPhotoAlternateIcon />
+                                                    </Fab>
+                                                </label></>
+                                                </div>
+                                                    : <><input type="file" id="video-upload" accept="video/*"
+                                                        style={{ display: "none", }}
+                                                        onChange={e => {
+                                                            setFieldValue("VideoUrl", e.target.files[0])
+                                                            setVideo(e.target.files[0])
+                                                        }} />
+                                                   <label htmlFor="video-upload">
+                                                    <Fab component="span" >
+                                                        <AddPhotoAlternateIcon />
+                                                    </Fab>
+                                                </label></>}
 
                                             </div>
                                             <p style={{    marginTop: "29px",
@@ -148,7 +164,7 @@ const UploadVideoPage = () => {
                                             <div className="shadow-box ms-5 mt-6" style={{
                                                 flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
                                             }}>
-                                                <div style={{ display: 'flex' }}>
+                                                <div>
                                                     <div style={{    display: "flex",flexDirection: "column"}}>
                                                         <label for="Titre">Titre Vidéo</label>
                                                         <TextField type="video"   
@@ -167,22 +183,7 @@ const UploadVideoPage = () => {
                                                             />
 
                                                     </div>
-                                                    <div style={{    display: "flex",flexDirection: "column"}}>
-                                                        <label for="ordre" style={{ marginLeft: '10px' }}>Ordre Vidéo</label>
-                                                        <TextField type="video"  
-                                                         className={classes.root}
-                                                         sx={{ input: { color: "white" }, label: {color: "white"}, floatingLabelFocusStyle: {
-                                                             color: "white"
-                                                         },shrink:{color: "white"}}}    inputProps={{ style: { color: 'white'} }}
-                                                        style={{ marginLeft: '10px' }} id="idordre" placeholder="Donnez l'ordre de vidéo"
-                                                            name='ordre'
-                                                            type='number'
-                                                            onBlur={handleBlur}
-                                                            onChange={handleChange}
-                                                            value={values.ordre}
-                                                            error={!!touched.ordre && !!errors.ordre} 
-                                                            helperText={touched.ordre && errors.ordre} />
-                                                    </div>
+                                                
                                                 </div>
                                                 <div style={{ display: 'flex',gap:"10px"}}>
                                                     <div style={{    display: "flex",flexDirection: "column"}}>

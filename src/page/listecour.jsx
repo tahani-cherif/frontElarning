@@ -40,6 +40,10 @@ useEffect(()=>{
                           <small>
                           <span className="text-muted font-bold">Etat du cours :  </span>  {item?.isDeleted ? "n'est pas disponnible" : "Disponible"}
                           </small>
+                          <br/>
+                          <small>
+                          <span className="text-muted font-bold">Langue du cours :  </span>  {item?.langue}
+                          </small>
                         </div>
                         </div>
                        <Link to={`/${user?.role==="formateur" ? "formateur" : "user"}/deatillecoursuser/${item?._id}`} style={{ display: "flex", flexDirection: "column",justifyContent: "center" }}> <Button variant="contained">Accéder au cours</Button></Link>

@@ -92,7 +92,17 @@ export const searchcour = createAsyncThunk(
     }
   }
 )
-
+export const getALLcoursection= createAsyncThunk(
+  "cour/getALLcoursection",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/cour/getsection/${data}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 export const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -101,11 +111,25 @@ export const userSlice = createSlice({
     datauser: [],
     cour: [],
     dataformateur: [],
+    section:[],
     status: null,
     error: null,
   },
   reducers: {},
   extraReducers: {
+    [getALLcoursection.fulfilled]: (state, action) => {
+      state.section = action.payload;
+      state.status = "success";
+      state.error = null;
+    },
+    [getALLcoursection.pending]: (state) => {
+      state.status = "loading";
+      state.error = null;
+    },
+    [getALLcoursection.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.payload;
+    },
     [getALLcour.fulfilled]: (state, action) => {
       state.datacour = action.payload;
       state.status = "success";

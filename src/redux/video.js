@@ -86,7 +86,7 @@ export const videoSlice = createSlice({
       state.error = action.payload;
     },
     [getVideoByid.fulfilled]: (state, action) => {
-      // state.datavideo = action.payload;
+    //   state.datavideo = action.payload;
       state.datavideos = action.payload;
       state.status = "success";
       state.statusvideo = "success";

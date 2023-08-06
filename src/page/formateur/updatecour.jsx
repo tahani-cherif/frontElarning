@@ -83,6 +83,7 @@ const UpdateCours = () => {
         formData.append('actual_Price', values.actual_Price)
         formData.append('discount_Price', values.discount_Price)
         formData.append('bioFormateur', values.bioFormateur)
+        formData.append('langue', values.langue)
         // formData.append('rating_Count', 200)
         // formData.append('rating_Star', 3)
         dispatch(updatecour({id:id,data:formData})).then(secc => {
@@ -104,6 +105,7 @@ console.log(selectedOption)
         ce_que_vous_apprenez: yup.string().required("Required"),
         actual_Price: yup.number().required("Required"),
         discount_Price: yup.number().required("Required"),
+        langue: yup.string().required("Required"),
     })
     const initialValues = {
         image: cour?.image,
@@ -113,7 +115,8 @@ console.log(selectedOption)
         categorie: cour?.categorie,
         actual_Price: cour?.actual_Price,
         discount_Price: cour?.discount_Price,
-        ce_que_vous_apprenez: cour?.ce_que_vous_apprenez
+        ce_que_vous_apprenez: cour?.ce_que_vous_apprenez,
+        langue: cour?.langue,
     };
 
   
@@ -143,9 +146,26 @@ console.log(selectedOption)
                                                 justifyContent: "center",
                                                 display: "flex"
                                             }}>
-                                                {values.image  ?<img className="imgcour "
-                                                    style={{}}
-                                                    src={image == null ? values.image ? "http://localhost:8000/" + values.image : "./images.png" : URL.createObjectURL(image)} alt="" />
+                                                {values.image  ?<div className='flex flex-col items-center'>
+
+<img className="imgcour "
+style={{}}
+src={image == null ? values.image ? "http://localhost:8000/" + values.image : "./images.png" : URL.createObjectURL(image)} alt="" />
+<><input type="file"
+accept="image/*"
+style={{ display: "none", }}
+id="button-file"
+onChange={e => {
+    setFieldValue("image", e.target.files[0])
+    setImage(e.target.files[0])
+}} />
+
+<label htmlFor="button-file">
+<Fab component="span" >
+    <AddPhotoAlternateIcon />
+</Fab>
+</label></>
+</div>
                                               : <><input type="file"
                                                     accept="image/*"
                                                     style={{ display: "none", }}
@@ -193,6 +213,7 @@ console.log(selectedOption)
                                                     label="categorie"
                                                     onBlur={handleBlur}
                                                     name="categorie"
+                                                    defaultValue={values?.categorie}
                                                     onChange={handleChange}
                                                     value={values.categorie}
                                                     error={!!touched.categorie && !!errors.categorie}
@@ -203,7 +224,31 @@ console.log(selectedOption)
                                                         }
                                                     </Select>
                                                 </FormControl>
-                                        
+                                                <div className="form-group mb-3 mt-3">
+                                            <FormControl  fullWidth className={classesselect.customFormControl}>
+                                                    <InputLabel id="demo-simple-select-label" style={{ color: 'white' }}>langue de cour</InputLabel>
+                                                    <Select
+                                                     style={{ width: '400px' }}
+                                                    className={classesselect.customSelect}
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    label="langue de cour"
+                                                    name="langue"
+                                                    defaultValue={cour?.langue}
+                                                    value={values.langue}
+                                                    SelectDisplayProps={{ style: { color:"white"} }}
+                                                    onChange={handleChange}
+                                                    error={!!touched.langue && !!errors.langue}
+                                                        helperText={touched.langue && errors.langue} >
+                                                        
+                                                        
+                                                        <MenuItem value="Français">Français</MenuItem>
+                                                        <MenuItem value="Anglais">Anglais</MenuItem>
+                                                    
+                                                    </Select>
+                                                    </FormControl>
+                                                   
+                                            </div>
                                                 <div className="form-group mb-3">
                                                     <label for="description">Description cours</label>
                                                     <TextField

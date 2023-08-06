@@ -1,7 +1,7 @@
 
 
 import React, {  useEffect } from "react";
-import { Box, CircularProgress, useTheme, Typography } from "@mui/material";
+import { Box, CircularProgress, useTheme, Typography,Grid } from "@mui/material";
 import { DataGrid, GridToolbar, GridActionsCellItem } from "@mui/x-data-grid";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,13 +15,31 @@ import AddIcon from '@mui/icons-material/Add';
 import { getALLcourformateur, deletecour ,updatecour} from '../../redux/cour';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CheckIcon from '@mui/icons-material/Check';
+import QueueIcon from '@mui/icons-material/Queue';
+import Modal from '@mui/material/Modal';
 
 const ListeCourFormateur = () => {
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    backgroundColor:"#144272",
+    border: '1px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
   const user=JSON.parse(localStorage.getItem('user'));
   const { dataformateur } = useSelector(state => state.cour)
   const { status } = useSelector(state => state.cour)
   let navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
+    const [open, setOpen] = React.useState(false);
+    const [id, setId] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     dispatch(getALLcourformateur(user?._id))
   }, [])
@@ -70,6 +88,7 @@ const ListeCourFormateur = () => {
     },
     { field: "titre", headerName: "Titre du cours", width: 200 },
     { field: "categorie", headerName: "Catégorie", width: 200 },
+    { field: "langue", headerName: "Langue", width: 200 },
     { field: "actual_Price", headerName: "Prix initial", width: 80 },
     { field: "discount_Price", headerName: "Prix discount", width: 120 },
 
@@ -86,7 +105,7 @@ const ListeCourFormateur = () => {
       width: 300,
       cellClassName: 'actions',
       getActions: (params) => [
-        !params.row?.isfinish ?<Button variant="outlined" style={{'color': 'white'}}  startIcon={<CheckIcon style={{'color': 'white'}} />} onClick={() => { 
+        !params.row?.isfinish ?params.row?.onhold ? <p>En attente confirmation de admin</p> : <Button variant="outlined" style={{'color': 'white'}}  startIcon={<CheckIcon style={{'color': 'white'}} />} onClick={() => { 
            if(params.row?.isDeleted)
            {
             Swal.fire({
@@ -96,12 +115,12 @@ const ListeCourFormateur = () => {
           })
 
            }else{
-          dispatch(updatecour({id:params.row?._id,data:{isfinish:true}})).then((secc) => {
+          dispatch(updatecour({id:params.row?._id,data:{onhold:true}})).then((secc) => {
             if(secc.type==="cour/updatecour/fulfilled" ){
 
               Swal.fire(
                         'Success',
-                        `La création du cours est terminé et il est apparut dans la plateforme`,
+                        `En attente confirmation de admin`,
                         'success'
                       ) 
                       dispatch(getALLcourformateur(user?._id))
@@ -121,33 +140,47 @@ const ListeCourFormateur = () => {
       ]
     },
     {
-      field: 'Affecter PDF',
+      field: 'add section',
       type: 'actions',
-      headerName: ' Affecter un fichier PDF',
+      headerName: 'Ajouter section',
       width: 200,
       cellClassName: 'actions',
       getActions: (params) => [
-        <Button variant="outlined" style={{'color': 'white'}}  startIcon={<PictureAsPdfIcon style={{'color': 'white'}}/>} onClick={() => { navigate(`/formateur/uploadpdf/${params.row._id}`) }}>
-          ADD PDF
+        <Button variant="outlined" style={{'color': 'white'}}  startIcon={<QueueIcon style={{'color': 'white'}}/>} onClick={()=> {handleOpen()
+          setId(params.row._id)}}>
+          ADD Section
         </Button>,
       ]
-    },
-    {
-      field: 'AFFECTERvideo',
-      type: 'actions',
-      headerName: 'Affecter une Vidéo',
-      width: 200,
-      cellClassName: 'actions',
-      getActions: (params) =>
-        [
-          <Button variant="outlined" style={{'color': 'white'}}  startIcon={<OndemandVideoIcon style={{'color': 'white'}} />} onClick={() => { navigate(`/formateur/uploadvideo/${params.row._id}`) }}>
-            ADD Video
-          </Button>,
-        ]
     },
   ];
   return <>
     <Box m="20px" >
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+          choisir entre ajouter une pdf ou vidéo
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Grid item xs={12}>
+          <Button variant="outlined" style={{backgroundColor:"white",marginTop:"10px",width:"100%" }} startIcon={<AddIcon />} onClick={()=>{
+            navigate(`/formateur/uploadpdf/${id}`)
+            localStorage.setItem("type","pdf")
+          
+        }}>Add PDF</Button>
+        <Button variant="outlined" style={{backgroundColor:"white",marginTop:"10px",width:"100%" }} startIcon={<AddIcon />} onClick={()=>{
+          navigate(`/formateur/uploadvideo/${id}`)
+          localStorage.setItem("type","video")
+        }}>Add vidéo</Button>
+              </Grid>
+              
+          </Typography>
+        </Box>
+      </Modal>
     {status==="loading" ? <div style={{display: "flex",
     justifyContent: "center",
     marginTop: "81px"}}><CircularProgress style={{'color': 'white'}}/> </div>:<Box>

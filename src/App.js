@@ -31,6 +31,7 @@ import Consditiongenearle from "./page/consitiongenearle";
 import { Layout, theme } from 'antd';
 import VideoPage from "./page/videopage";
 import Contact from "./page/contact";
+import Updatepdf from "./page/formateur/updatepdf";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -67,6 +68,7 @@ const LinkFormateur = () => {
       <Route path="/updatevideo/:id" element={<UpdateVideoPage />} />
       <Route path="/deatillecours/:id" element={<Detaillecour />} />
       <Route path="/videopage/:id" element={<VideoPage />} />
+      <Route path="/updatepdf/:id" element={<Updatepdf />} />
     </Routes>
   );
 };

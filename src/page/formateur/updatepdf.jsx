@@ -1,11 +1,11 @@
-import React from "react"
+import React,{useEffect} from "react"
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from "formik";
 import { faCloudUpload } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { createpdf } from '../../redux/pdf'
+import { getpdf,updatepdf } from '../../redux/pdf'
 import * as yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import { useParams } from 'react-router-dom';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const Uploadpdf = () => {
+const Updatepdf = () => {
     const classes = useStyles();
     const user=JSON.parse(localStorage.getItem('user'));
     const { id } = useParams();
@@ -45,6 +45,11 @@ const Uploadpdf = () => {
     const inputRef = React.useRef()
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {data} =useSelector(x=>x.pdf)
+    useEffect(()=>{
+        dispatch(getpdf(id))
+        // setPdfFiles(data?.file)
+      },[])
     const handleFormSubmit = async (values, { resetForm }) => {
         console.log(values)
         const formData = new FormData();
@@ -52,10 +57,9 @@ const Uploadpdf = () => {
         formData.append('titre', values.titre)
         formData.append('description', values.description)
         formData.append('createur',user?._id)
-        formData.append('course',id)
-        dispatch(createpdf(formData)).then(secc => {
-            if (secc?.type === "pdf/createpdf/fulfilled") {
-                navigate("/formateur/listevideobycour/"+id)
+        dispatch(updatepdf({id:id,data:formData})).then(secc => {
+            if (secc?.type === "pdf/updatepdf/fulfilled") {
+                navigate("/formateur/listevideobycour/"+data?.course)
             }
         }).catch(err => {
             console.log('test2', err)
@@ -71,9 +75,9 @@ const Uploadpdf = () => {
         return extension;
     };
     const initialValues = {
-        file: "",
-        description: "",
-        titre: "",
+        file: data?.file,
+        description: data?.description,
+        titre: data?.titre,
     };
 
     const checkoutSchema = yup.object().shape({
@@ -85,8 +89,8 @@ const Uploadpdf = () => {
         <div className="wrapper">
             <div className="box">
                 <div className="input-bx"> 
-                    <h2 className="upload-area-title"> Télécharger votre exercice</h2>
-                    <Formik onSubmit={handleFormSubmit} initialValues={initialValues} validationSchema={checkoutSchema}>
+                    <h2 className="upload-area-title"> Mise à jour  votre exercice</h2>
+                    <Formik  enableReinitialize={true}  onSubmit={handleFormSubmit} initialValues={initialValues} validationSchema={checkoutSchema}>
                         {({ values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit, }) => (
                             <form onSubmit={handleSubmit}>
                                   <div  className="uploaded">
@@ -173,4 +177,4 @@ const Uploadpdf = () => {
     );
 };
 
-export default Uploadpdf;
+export default Updatepdf;

@@ -82,6 +82,7 @@ const UploadCours = () => {
         formData.append('actual_Price', values.actual_Price)
         formData.append('discount_Price', values.discount_Price)
         formData.append('bioFormateur', values.bioFormateur)
+        formData.append('langue', values.langue)
         dispatch(createcour(formData)).then(secc => {
             if (secc?.type === "cour/createcour/fulfilled") {
                 navigate("/formateur/listecourformateur")
@@ -91,10 +92,10 @@ const UploadCours = () => {
         })
 
     };
-console.log(selectedOption)
     const checkoutSchema = yup.object().shape({
         image: yup.mixed().required("Required"),
         titre: yup.string().required("Required"),
+        langue: yup.string().required("Required"),
         bioFormateur: yup.string().required("Required"),
         description: yup.string().required("Required"),
         categorie: yup.string().required("Required"),
@@ -105,6 +106,7 @@ console.log(selectedOption)
     const initialValues = {
         image: "",
         titre: "",
+        langue: "",
         bioFormateur: "",
         description: "",
         categorie: "",
@@ -140,9 +142,26 @@ console.log(selectedOption)
                                                 justifyContent: "center",
                                                 display: "flex"
                                             }}>
-                                                {values.image  ?<img className="imgcour "
+                                                {values.image  ?<div className='flex flex-col items-center'>
+
+                                                    <img className="imgcour "
                                                     style={{}}
                                                     src={image == null ? values.image ? "http://localhost:8000/" + values.image : "./images.png" : URL.createObjectURL(image)} alt="" />
+                                                    <><input type="file"
+                                                    accept="image/*"
+                                                    style={{ display: "none", }}
+                                                    id="button-file"
+                                                    onChange={e => {
+                                                        setFieldValue("image", e.target.files[0])
+                                                        setImage(e.target.files[0])
+                                                    }} />
+
+                                                <label htmlFor="button-file">
+                                                    <Fab component="span" >
+                                                        <AddPhotoAlternateIcon />
+                                                    </Fab>
+                                                </label></>
+                                                    </div>
                                               : <><input type="file"
                                                     accept="image/*"
                                                     style={{ display: "none", }}
@@ -201,7 +220,7 @@ console.log(selectedOption)
                                                     </Select>
                                                 </FormControl>
                                         
-                                                <div className="form-group mb-3">
+                                                    <div className="form-group mb-3">
                                                     <label for="description">Description cours</label>
                                                     <TextField
                                                     className={classes.root}
@@ -219,7 +238,31 @@ console.log(selectedOption)
                                                         value={values.description}
                                                         error={!!touched.description && !!errors.description}
                                                         helperText={touched.description && errors.description} />
-                                                </div>
+                                            </div>
+                                            <div className="form-group mb-3">
+                                            <FormControl  fullWidth className={classesselect.customFormControl}>
+                                                    <InputLabel id="demo-simple-select-label" style={{ color: 'white' }}>langue de cour</InputLabel>
+                                                    <Select
+                                                     style={{ width: '400px' }}
+                                                    className={classesselect.customSelect}
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    label="langue de cour"
+                                                    name="langue"
+                                                    value={values.langue}
+                                                    SelectDisplayProps={{ style: { color:"white"} }}
+                                                    onChange={handleChange}
+                                                    error={!!touched.langue && !!errors.langue}
+                                                        helperText={touched.langue && errors.langue} >
+                                                        
+                                                        
+                                                        <MenuItem value="Français">Français</MenuItem>
+                                                        <MenuItem value="Anglais">Anglais</MenuItem>
+                                                    
+                                                    </Select>
+                                                    </FormControl>
+                                                   
+                                            </div>
 
                                                 <label for="montant">Montant</label>
                                                 <div>

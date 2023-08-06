@@ -8,7 +8,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
-import  {getALLcour} from '../../redux/cour'
+import  {getALLcour,updatecour} from '../../redux/cour'
+import Button from '@mui/material/Button';
+import Swal from 'sweetalert2'
 
 const ListeCourAdmin=()=>{
     const {datacour} = useSelector(state=>state.cour)
@@ -49,8 +51,44 @@ const ListeCourAdmin=()=>{
         { field: "categorie", headerName: "Categorie", width: 200 },
         { field: "actual_Price", headerName: "Prix initiale", width: 80 },
         { field: "discount_Price", headerName: "Prix discount" , width: 100 },
-        { field: "isDeleted", headerName: "Etat du cours", width: 200, valueGetter: rowData =>{
-          return rowData.row?.isDeleted ? "N'est pas disponnible": "Disponnible"},}
+        {
+          field: 'Etat du cours',
+          type: 'actions',
+          headerName: 'Etat du cours',
+          width: 300,
+          cellClassName: 'actions',
+          getActions: ( rowData ) => 
+    
+    {     
+         return      [
+  
+         rowData.row?.isDeleted ? <p>N'est pas disponnible </p>: rowData.row?.onhold ?  <Button variant="contained"  color="success" 
+          onClick={() => {
+            dispatch(updatecour({id:rowData.row._id,data:{isfinish:true,onhold:false}})).then(data => {
+          
+              if (data.type === "cour/updatecour/fulfilled") {
+                Swal.fire(
+                  'Succès',
+                  `Cour est terminer`,
+                  'success'
+                )
+               dispatch(getALLcour())
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: "Quelque chose s'est mal passé!",
+                })
+              }
+
+            })
+          }}
+        >Marquer cour comme terminer</Button> :<p>Disponnible</p>,
+              ]}
+            
+         
+          
+        },
       ];
     return <>
        <Box m="20px">

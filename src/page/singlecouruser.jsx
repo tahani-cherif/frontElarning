@@ -17,6 +17,7 @@ import {getVideoByCour} from '../redux/video'
 import QuizIcon from '@mui/icons-material/Quiz';
 // import {getVideoById} from '../redux/video'
 import Avatar from '@mui/material/Avatar';
+import {getALLcoursection} from '../redux/cour'
 
 const SingleCoursePageuser=()=>{
   const  { id } = useParams();
@@ -24,10 +25,12 @@ const SingleCoursePageuser=()=>{
   const {status} = useSelector(state=>state.cour)
   const {data} = useSelector(state=>state.cour)
   const {datavideo} = useSelector(state=>state.video)
+  const {section} = useSelector(state=>state.cour);
   const dispatch = useDispatch();
   const [video1,setvideo1]=useState()
   useEffect(()=>{
     dispatch(getcourbyid(id))
+    dispatch(getALLcoursection(id))
     dispatch(getVideoByCour(id)).then(secc=>{
       console.log(secc)
       const x=secc?.payload
@@ -60,11 +63,11 @@ return (
           <div style={{marginTop:"20px"}}>
             <div className='boxicon'>
              <VideoChatIcon/>
-             <p>{  datavideo?.length} Videos</p>
+             <p>{  data?.videoId?.length} Videos</p>
             </div>
             <div className='boxicon'>
               <AutoStoriesIcon/>
-              <p>Des PDF pour la résumer de votre <br/>formation</p>
+              <p>{ section?.length-data?.videoId?.length >=0 ? section?.length-data?.videoId?.length : 0}  PDF </p>
             </div>
           </div>
        
@@ -119,8 +122,10 @@ return (
     margin: "auto",marginTop:"20px",marginBottom: "-300px"}}>
       <h2 className='title2' style={{fontSize:"1.8rem",marginBottom:"20px"}}>Contenu du cours</h2>
       <div style={{marginTop:"60px"}}>
-      <p style={{marginBottom:"20px"}}>{  datavideo?.length}  Video • Durée totale: {time} min</p>
-     { datavideo?.map(item=>
+      <p style={{marginBottom:"20px"}}>{  section?.length}  Section • Durée totale: {time} min</p>
+     { section.slice().sort((a, b) =>{
+            return a.order - b.order;
+        })?.map((item,index)=>
       { 
         return <Accordion style={{color:"white",backgroundColor:"#144272"}}>
         <AccordionSummary
@@ -128,8 +133,8 @@ return (
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography  sx={{ width: '95%', flexShrink: 0 }}><Link to={'/user/videopage/'+item?._id}  >{item?.titre}</Link></Typography>
-          <Typography sx={{ color: 'white' }} >{item?.dure} min</Typography>
+          <Typography  sx={{ width: '95%', flexShrink: 0 }}><Link to={item?.type==="video" ? '/user/videopage/'+item?._id : "http://localhost:8000/"+item?.file}  >Section {item?.order}:{item?.titre}</Link></Typography>
+          {item?.type==="video" && <Typography sx={{ color: 'white' }} >{item?.dure} min</Typography>}
         </AccordionSummary>
         <AccordionDetails>
          <Typography>

@@ -14,11 +14,12 @@ const Course = (props) => {
   const dispatch = useDispatch();
   console.log(discount_Price, actual_Price)
   return (
-    <CourseCard>
+    <CourseCard className='grid grid-rows-2'>
       <div className='item-img'>
-        <img src={`http://localhost:8000/${image}`} className='row-image' width={"100%"} height={"80%"}/>
+        <img src={`http://localhost:8000/${image}`}   className='w-full h-full '/>
       </div>
-      <div className='item-body'>
+      <div className='flex flex-col justify-between' >
+        <div className='item-body'>
         <h5 className='item-name'>{titre}</h5>
         <span className='item-createur'>{createur?.fullName}</span>
         <div className='item-rating flex' >
@@ -32,8 +33,8 @@ const Course = (props) => {
           <span className='item-price-new'>{discount_Price ? discount_Price : actual_Price}€</span>
           <span className='item-price-old'>{discount_Price ? actual_Price : null}€</span>
         </div>
-      </div>
-       <div className='item-btns flex '>
+        </div>
+        <div className='item-btns flex '>
         <Link to={`/${user?.role==="user" ? "user" :"formateur"}/deatillecours/${_id}`} className="item-btn see-details-btn">
           Voir les détails du cours</Link>
         <button className='item-btn add-to-cart-btn' onClick={() => {
@@ -48,6 +49,8 @@ const Course = (props) => {
 
         }} >Acheter cours</button>
       </div> 
+      </div>
+     
     </CourseCard>
   )
 }
@@ -56,8 +59,8 @@ const CourseCard = styled.div`
   margin-bottom: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   // box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   border-radius: 10px;
   background-color: #144272;
   .item-body{

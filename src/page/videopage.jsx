@@ -16,6 +16,7 @@ import {getcourbyid} from '../redux/cour'
 // import {getpdfbyid} from '../redux/PDF'
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from "axios";
+import {getALLcoursection} from '../redux/cour'
 
 const VideoPage = () => {
     const  { id } = useParams();
@@ -31,14 +32,16 @@ const VideoPage = () => {
     const {status} = useSelector(state=>state.cour)
     const {statusvideo} = useSelector(state=>state.video)
     const {statuscomment} = useSelector(state=>state.comment)
+    const {section} = useSelector(state=>state.cour);
     const dispatch = useDispatch();
     useEffect(()=>{
         dispatch(getcourbyid(localStorage.getItem('courid')))
         dispatch(getVideoByid(id))
         dispatch(getcommentbyvideo(id))
         dispatch(getVideoByCour(localStorage.getItem('courid')))
+        dispatch(getALLcoursection(localStorage.getItem('courid')))
            },[])
-        console.log(datavideo)
+        console.log(section)
     return (
         <div >
          <div style={{display:"absulte"}}>
@@ -112,7 +115,7 @@ const VideoPage = () => {
             </div>
 
             <div className="Recommendation">
-               { datavideo?.filter(x=>x?._id!=id)?.sort((a,b)=>a?.ordre-b?.ordre)?.map(item=> <Card item={item} settest={settest}/>) }
+               { section?.filter(x=>x?._id!=id)?.sort((a,b)=>a?.ordre-b?.ordre)?.map(item=> <Card item={item} settest={settest}/>) }
             </div>
       
         </Container>}

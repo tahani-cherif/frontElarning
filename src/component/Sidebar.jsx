@@ -64,14 +64,6 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
           <ListItemText>Accéder au panier</ListItemText>
         </MenuItem>
         </Link>
-        <Link to="/chatroom" onClick={handleMenu}>
-           <MenuItem>
-          <ListItemIcon>
-            <MarkUnreadChatAltIcon fontSize="small" sx={{ color: "white"}}/>
-          </ListItemIcon>
-          <ListItemText>Chatroom</ListItemText>
-        </MenuItem>
-        </Link>
       </MenuList>
     </Paper>
       </div>) }
@@ -123,14 +115,6 @@ export  const Menu = ({ isMenuOpen ,handleMenu}) => {
             <ShoppingCartIcon fontSize="small" sx={{ color: "white"}}/>
           </ListItemIcon>
           <ListItemText>Accéder au panier</ListItemText>
-        </MenuItem>
-        </Link>
-        <Link to="/chatroom" onClick={handleMenu}>
-           <MenuItem>
-          <ListItemIcon>
-            <MarkUnreadChatAltIcon fontSize="small" sx={{ color: "white"}}/>
-          </ListItemIcon>
-          <ListItemText>Chatroom</ListItemText>
         </MenuItem>
         </Link>
       </MenuList>

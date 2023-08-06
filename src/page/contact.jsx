@@ -67,23 +67,29 @@ const Contact=()=>{
       }
       const handleFormSubmit = async(x,{resetForm}) => {
      console.log(x)
-    //  dispatch(sendemailcontact(x)).then(secc =>{ 
-        // Swal.fire(
-    //     'Success',
-    //     `Votre email envoyer avec succes`,
-    //     'success'
-    //   )})
-    emailjs.sendForm('service_suxqz56','template_049gwlj', x)
-    .then((result) => {
-         Swal.fire(
+     dispatch(sendemailcontact(x)).then(secc =>{ 
+        Swal.fire(
         'Success',
         `Votre email envoyer avec succes`,
         'success'
-         )
-         console.log(result);
-    }, (error) => {
-    console.log(error);
-    });
+      )
+      resetForm({ email: "",
+      desc: "",
+      object: "",})
+    })
+    
+    // emailjs.sendForm('service_suxqz56','template_049gwlj', x)
+    // .then((result) => {
+
+    //      Swal.fire(
+    //     'Success',
+    //     `Votre email envoyer avec succes`,
+    //     'success'
+    //      )
+    //      console.log(result);
+    // }, (error) => {
+    // console.log(error);
+    // });
       }
     return(<div className="m-auto">
        

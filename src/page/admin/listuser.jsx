@@ -35,7 +35,29 @@ const Listeuser = () => {
       cellClassName: 'actions',
       getActions: (params) => {
         return [
-          params.row.role === "formateur" ? <p>Formateur</p> : <Button variant="contained" color="success"
+          params.row.role === "formateur" ? 
+          <Button variant="contained"  style={{color:"white"}} 
+          onClick={() => {
+            dispatch(updateuser({_id:params.row._id,data:{role:"user"}})).then(data => {
+          
+              if (data.type === "user/updateuser/fulfilled") {
+                Swal.fire(
+                  'Succès',
+                  `L'utilisateur devient simpel user `,
+                  'success'
+                )
+                dispatch(gettAllUser())
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: "Quelque chose s'est mal passé!",
+                })
+              }
+
+            })
+          }}
+        >Marquer comme simpel user</Button> : <Button variant="contained" color="success"
             onClick={() => {
               dispatch(updateuser({_id:params.row._id,data:{role:"formateur"}})).then(data => {
             
@@ -82,7 +104,7 @@ const Listeuser = () => {
           >
             <DataGrid
               getRowId={(row) => row?._id}
-              rows={alldata?.slice()?.sort(function (a, b) {
+              rows={alldata?.slice() .slice()?.sort(function (a, b) {
                 return new Date(b?.createdAt) - new Date(a?.createdAt);
               }) .filter(x=>x._id!=localStorage.getItem("userid"))|| []}
               columns={columns}

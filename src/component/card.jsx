@@ -51,11 +51,14 @@ const Card = ({ type,item,settest }) => {
   console.log("tt",item)
   return (
     <Container>
-      <video src={"http://localhost:8000/"+item?.videoUrl} type="/mp4" className="regleVideo" controls accelerometer clipboard-write encrypted-media gyroscope picture-in-picture></video>
+     {item?.type==="video" ? <video src={"http://localhost:8000/"+item?.videoUrl} style={{width: "100%",height:"auto"}} type="/mp4" className="regleVideo" controls accelerometer clipboard-write encrypted-media gyroscope picture-in-picture></video>
+     :  <a href={'http://localhost:8000/'+item?.file}> <img src='/pdf3.png' alt='' style={{width: "100%",height:"auto"}} className='cursor-pointer'/></a>}
       <Details type={type}>
-        <a  href={'/user/videopage/'+item?._id} onClick={()=>settest(true)}><Texts>
-          <Title>{item?.titre} • </Title>
-          <ChannelName>Lama Dev</ChannelName>
+        <a  href={item?.type==="video" ? '/user/videopage/'+item?._id :'http://localhost:8000/'+item?.file} onClick={()=>settest(true)}><Texts>
+        <ChannelName>section {item?.order} •</ChannelName>
+          <Title>{item?.titre}  </Title>
+      
+
         </Texts>
         </a>
       </Details>
