@@ -64,7 +64,7 @@ const Home=()=>{
     return  <div className="container mx-auto p-16">
       {status==="loading" ? <div style={{display: "flex",
     justifyContent: "center",
-    marginTop: "81px"}}><CircularProgress /> </div>:
+    marginTop: "81px"}}><CircularProgress style={{color:"white"}} /> </div>:
     <>
     <ImageSlider />
         <div className="grid grid-cols-4 gap-4 mb-6">
